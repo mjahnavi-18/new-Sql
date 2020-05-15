@@ -47,22 +47,18 @@ select sum(number_of_books) from lms_book_details;
 alter table lms_book_details rename column book_edition to number_of_books;
 select * from lms_book_details;
 
-select sum(book_edition) as NO_OF_BOOKS from lms_book_details where category = 'java';
-
 select count(category) as no_of_books from lms_book_details  where category = 'java' group by category ;
  
 /*6. Write a query to list the category and number of books in each category with alias name ‘NO_OF_BOOKS’*/
 select * from lms_book_details;
-select category, book_edition as NO_OF_BOOKS from lms_book_details;
 
 select category,count(category) as no_of_books from lms_book_details group by category;
 
-select category, count(category) as NO_OF_BOOKS from lms_book_details group by category;
+
 /* 7. Write a query to display the number of books published by "Prentice Hall” with the alias name
 “NO_OF_BOOKS”.*/
 
 select * from lms_book_details;
-select sum(book_edition) as no_of_books from lms_book_details where publication = 'Prentice Hall';
 
 select count(book_code) as no_of_books from lms_book_details where publication = 'Prentice Hall';
 
@@ -98,6 +94,8 @@ member name in title case with alias name 'Name'.*/
 select * from lms_members;
 select member_id, member_name as Name from lms_members where city =  'delhi' or 'chennai' ;
 
+/*12. Write a query to concatenate book title, author and display in the following format.
+Book_Title_is_written_by_Author.*/
 
 desc lms_book_details;
 
@@ -108,3 +106,33 @@ Write a query to display the average price of books which is belonging to ‘JAV
 “AVERAGEPRICE”
 */
 select category, avg(price) as averageprice from lms_book_details where category = 'java';
+
+
+/*14
+=================
+Write a query to display the supplier id, supplier name and email of the suppliers who are all having gmail
+account.*/
+select * from lms_suppliers_details;
+select supplier_id,supplier_name, email from lms_suppliers_details where email like '%@gmail.com';
+
+
+/*15
+=========================
+Write a query to display the supplier id, supplier name and contact details. Contact details can be either phone
+number or email or address with alias name “CONTACTDETAILS”. If phone number is null then display email,
+even if email also null then display the address of the supplier. Hint: Use Coalesce function.
+*/
+
+select supplier_id,supplier_name,coalesce(contact,email,address) as ContactDetails from lms_suppliers_details;
+
+
+
+
+/*16
+===================
+Write a query to display the supplier id, supplier name and contact. If phone number is null then display ‘No’
+else display ‘Yes’ with alias name “PHONENUMAVAILABLE”. Hint: Use NVL2.
+*/
+
+
+select supplier_id,supplier_name,contact nullif( )
