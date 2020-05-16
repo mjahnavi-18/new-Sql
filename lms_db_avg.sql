@@ -71,7 +71,7 @@ where date_issue is null;
 select lms_members.member_name, lms_book_issue.member_id
 from lms_members
 join lms_book_issue on lms_members.member_id = lms_book_issue.member_id
-where fine_range = 'R0' and date_return < '2013-01-01';
+where fine_range = 'R0' and year(date_return) = '2012';
 
 /*9. Write a query to display the date on which the maximum numbers of books were issued and the number of
 books issued with alias name “NOOFBOOKS”.*/
@@ -95,3 +95,16 @@ select rack_num, category as noofbooks from lms_book_details order by rack_num a
 category author, price, date of issue, date of return, actual returned date, issue status, fine amount.*/
  
  
+/*13. Write a query to display the book code, title, publish date of the books which is been published in the month of
+December.*/
+
+select book_code, book_title, publish_date from lms_book_details where  monthname(publish_date) = 'december';
+
+/*14. Write a query to display the book code, book title and availability status of the ‘JAVA’ books whose edition is
+"5”. Show the availability status with alias name “AVAILABILITYSTATUS”. Hint: Book availability status can be
+fetched from “BOOK_ISSUE_STATUS” column of LMS_BOOK_ISSUE table.*/
+
+select lms_book_details.book_title, lms_book_issue.date_issue 
+from lms_book_details
+join lms_book_issue on lms_book_details.book_code = lms_book_issue.book_code
+where category = 'java' and book_edition = '5' and date_issue is not null; 
